@@ -4,8 +4,10 @@ def print_header
   puts "-------------"
 end
 def print(students)
+  puts "Which letter would you like to filter names by?"
+  filter = gets.chomp.upcase
   students.each { |student|
-    if student[:name][0] == "J"
+    if student[:name][0] == filter
       puts "#{student[:name]} (#{student[:cohort]} cohort)"
     end}
 end
