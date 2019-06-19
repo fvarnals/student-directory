@@ -4,10 +4,11 @@ def print_header
   puts "-------------"
 end
 def print(students)
-  students.each { |student|
-    if student[:name].length < 12
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
-    end}
+  n = 0
+  until n == students.length
+    puts students[n][:name]
+    n += 1
+  end
 end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
