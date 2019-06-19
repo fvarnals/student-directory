@@ -4,11 +4,12 @@ def print_header
   puts "-------------"
 end
 def print(students)
-  n = 0
-  until n == students.length
-    puts students[n][:name]
-    n += 1
-  end
+  students.each { |student|
+  puts "#{student[:name]} (#{student[:cohort]} cohort):"
+  puts "Country of Birth: #{student[:country]}"
+  puts "Height: #{student[:height]}cm"
+  puts "#{student[:name]}'s hobbies include - #{student[:hobbies]}'"
+  puts "\n"}
 end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
@@ -23,8 +24,15 @@ def input_students
   name = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
+    puts "What is #{name}'s height in cm?"
+    height = gets.chomp
+    puts "What is #{name}'s country of birth?"
+    country = gets.chomp
+    puts "And what are their hobbies?"
+    hobbies = gets.chomp
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobbies: hobbies,\
+      country: country, height: height}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
