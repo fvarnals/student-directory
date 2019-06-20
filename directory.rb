@@ -1,14 +1,14 @@
 # let's put all students into an array
 def print_header
   puts "The students of Villains Academy"
-  puts "-------------"
+  puts "---------------------------------------"
 end
 def print(students)
   students.each { |student|
-  puts "#{student[:name]} (#{student[:cohort]} cohort):"
-  puts "Country of Birth: #{student[:country]}"
-  puts "Height: #{student[:height]}cm"
-  puts "#{student[:name]}'s hobbies include - #{student[:hobbies]}'"
+  puts "#{student[:name]} (#{student[:cohort]} cohort):".center(45)
+  puts "Country of Birth: #{student[:country]}".center(45)
+  puts "Height: #{student[:height]}cm".center(45)
+  puts "#{student[:name]}'s hobbies include - #{student[:hobbies]}".center(45)
   puts "\n"}
 end
 def print_footer(students)
