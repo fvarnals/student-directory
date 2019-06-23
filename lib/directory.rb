@@ -23,27 +23,27 @@ def input_students
   #create an empty array
   #students = []
   # get the first name
-  input = gets.chomp
+  input = STDIN.gets.chomp
   while !input.include?(",")
     puts "typo! - please include a comma to separate name and cohort"
-    input = gets.chomp
+    input = STDIN.gets.chomp
   end
   name = input.split(",")[0]
   cohort = input.split(",")[1].to_sym
   # while the name is not empty, repeat this code
   while !name.empty? do
     puts "What is #{name}'s height in cm?"
-    height = gets.chomp
+    height = STDIN.gets.chomp
     puts "What is #{name}'s country of birth?"
-    country = gets.chomp
+    country = STDIN.gets.chomp
     puts "And what are their hobbies?"
-    hobbies = gets.chomp
+    hobbies = STDIN.gets.chomp
     # add the student hash to the array
     @students << {name: name, cohort: cohort, hobbies: hobbies,\
       country: country, height: height}
     puts "Now we have #{@students.count} students"
     # get another name from the user
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
 end
 
@@ -71,7 +71,7 @@ def process(selection)
   when "3"
 	save_students
   when "4"
-  	load_students	  
+  	load_students
   when "9"
     exit # this will cause the program to terminate
   else
@@ -82,7 +82,7 @@ end
 def interactive_menu
 	loop do
     		print_menu
-    		process(gets.chomp)
+    		process(STDIN.gets.chomp)
   	end
 end
 
@@ -98,7 +98,7 @@ def save_students
 	file.close
 end
 
-def load_students
+def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
@@ -107,4 +107,17 @@ def load_students
   file.close
 end
 
+def try_load_students
+	filename = ARGV.first # first argument from the command line
+	return if filename.nil? # get out of the method if it isn't given
+	if File.exists?(filename) # if it exists
+		load_students(filename)
+		puts "Loaded #{@students.count} from #{filename}"
+	else # if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		exit # quit the program
+	end
+end
+
+try_load_students
 interactive_menu
